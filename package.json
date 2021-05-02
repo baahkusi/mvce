@@ -1,0 +1,57 @@
+{
+  "name": "fradiths-eyes",
+  "version": "1.0.0",
+  "description": "This blockchain indexer provides a unified API for all blockchain functionalities that do not requires the exposure of secret keys.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --file './tests/base.test.js' './tests/*.test.js'",
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "debug": "ndb server.js",
+    "prepare": "husky install",
+    "lint": "./node_modules/.bin/eslint .",
+    "sync": "node ./scripts/sync.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EjaraApp/fradiths-eyes.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EjaraApp/fradiths-eyes/issues"
+  },
+  "homepage": "https://github.com/EjaraApp/fradiths-eyes#readme",
+  "dependencies": {
+    "@prisma/client": "^2.20.1",
+    "axios": "^0.21.1",
+    "chai": "^4.3.4",
+    "cron": "^1.8.2",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-rate-limit": "^5.2.6",
+    "helmet": "^4.4.1",
+    "mocha": "^8.3.2",
+    "morgan": "^1.10.0",
+    "supertest": "^6.1.3",
+    "yargs": "^16.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.23.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^4.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.12.4",
+    "husky": "^5.2.0",
+    "prettier": "^1.17.0",
+    "prisma": "^2.20.1"
+  },
+  "engines": {
+    "node": "^10"
+  }
+}

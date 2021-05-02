@@ -1,0 +1,40 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Run Tests and Deploy
+
+on: push
+
+jobs:
+  test:
+    name: Test Job
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    env:
+        NODE_ENV: testing
+        PORT: 3000
+        DATABASE_URL: mysql://root:root@127.0.0.1:3306/test_db
+    steps:
+      - name: Set up MySQL
+        run: |
+          sudo /etc/init.d/mysql start
+          mysql -e 'CREATE DATABASE test_db;' -uroot -proot
+          mysql -e 'SHOW DATABASES;' -uroot -proot
+      - name: Checkout source code
+        uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: npm i
+      - name: Start MySQL
+        run: sudo service mysql start
+      - name: Migrate Database
+        run: npx prisma migrate deploy
+      - name: Run tests
+        run: npm test

@@ -1,0 +1,28 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Collection {
+  collectionCode String @id
+  collectionName String
+}
+
+model Package {
+  packageId    String @id
+  lastModified String
+  packageSummary Json?
+}
+
+model Granule {
+  granuleId String @id
+  lastModified String
+  granuleSummary Json?
+}
